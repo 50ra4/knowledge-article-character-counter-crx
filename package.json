@@ -1,7 +1,7 @@
 {
-  "name": "crx-vite-ts-react-template",
+  "name": "knowledge-article-character-counter-crx",
   "version": "1.0.0",
-  "description": "Chrome extension template using Vite, TypeScript and React",
+  "description": "chrome-extension that counts the number of characters in knowledge",
   "main": "index.js",
   "scripts": {
     "prepare": "husky install",
@@ -18,14 +18,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/50ra4/crx-vite-ts-react-template.git"
+    "url": "git+https://github.com/50ra4/knowledge-article-character-counter-crx"
   },
   "author": "50ra4",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/50ra4/crx-vite-ts-react-template/issues"
+    "url": "https://github.com/50ra4/knowledge-article-character-counter-crx/issues"
   },
-  "homepage": "https://github.com/50ra4/crx-vite-ts-react-template#readme",
+  "homepage": "https://github.com/50ra4/knowledge-article-character-counter-crx#readme",
   "dependencies": {
     "react": "18.2.0",
     "react-dom": "18.2.0"
