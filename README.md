@@ -1,7 +1,12 @@
-# crx-vite-ts-react-template
+# knowledge-article-character-counter-crx
 
-このプロジェクトは Vite、TypeScript、React を用いた Chrome 拡張機能を開発向けの Template です。
-一部、サンプルとなるソースコードを含んでいます。
+このプロジェクトは 以前開発した Knowledge の文字数カウンターの CLI ツールを Chrome の拡張機能にしたものです。
+
+以前開発していた repository は https://github.com/50ra4/knowledge-article-character-counter になります。
+
+作成した拡張機能は github pages に公開しているので、[こちら](https://50ra4.github.io/knowledge-article-character-counter-crx/)からダウンロードできます。
+
+免責：当拡張機能を利用して起きたトラブルや損失について開発者は一切の責任を負いませんので、理解した上で本機能をご利用ください mm
 
 ## Setup
 
@@ -73,10 +78,3 @@ VSCode の拡張機能と併用することで、ファイル保存時に実行�
 ```
 npm run docs
 ```
-
-## CI/CD
-
-github actions を用いた CI/CD を追加しています。
-CI は、type error、build、test のチェックを行なっています。
-CD は、前述の`npm run docs`を用いて、作成した Chrome 拡張機能を github pages に公開します。
-（github pages に公開するには別途 github repository の設定が必要です）
