@@ -31,8 +31,12 @@ export default defineManifest(({ command, mode, ...manifest }) => ({
   permissions: ['background'],
   content_scripts: [
     {
-      matches: ['https://example.com/*'],
-      js: ['src/content_scripts/sample.tsx'],
+      matches: ['*://*/*'],
+      include_globs: [
+        '*/open.knowledge/view/*', // 記事
+        '*/protect.draft/view/*', // 作成中の記事
+      ],
+      js: ['src/content_scripts/counter.tsx'],
     },
   ],
   background: {

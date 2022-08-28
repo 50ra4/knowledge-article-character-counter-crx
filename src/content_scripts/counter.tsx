@@ -4,15 +4,22 @@ import { createRoot } from 'react-dom/client';
 const Root = () => {
   return (
     <>
-      <h1>content_script sample</h1>
-      <p>This is being displayed by chrome-extension content_script</p>
+      <h1>Counter Sample</h1>
     </>
   );
 };
 
 const render = () => {
   const root = document.createElement('div');
-  document.body.prepend(root);
+  const contentElement: HTMLElement | null =
+    document.querySelector('div#content');
+
+  if (!contentElement) {
+    console.warn('not found knowledge content!');
+    return;
+  }
+
+  contentElement.prepend(root);
   createRoot(root).render(
     <StrictMode>
       <Root />
