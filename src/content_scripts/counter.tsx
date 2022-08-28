@@ -1,30 +1,19 @@
 import React, { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-
-type TagName = keyof HTMLElementTagNameMap;
+import { countCharacterInChildElements, CODE_TAGS } from '../utils/count';
 
 const getContentElement = (): HTMLElement | null =>
   document.querySelector('div#content');
 
-const CODE_TAGS: TagName[] = ['pre'];
-
-const countArticle = (excludedTags: TagName[]) =>
-  (Array.from(getContentElement()?.children ?? []) as HTMLElement[])
-    .map((elm) => ({
-      tagName: elm.tagName.toLowerCase() as TagName,
-      text: elm.innerText,
-    }))
-    .filter(({ tagName }) => !excludedTags.includes(tagName)) // 特定のタグを除く
-    .reduce((acc, cur) => acc + cur.text.length, 0);
+const countArticle = () => {
+  const elm = getContentElement();
+  return !elm ? 'NOT_FOUND' : countCharacterInChildElements(elm, CODE_TAGS);
+};
 
 const Root = () => {
-  const count = countArticle(CODE_TAGS);
-
-  return (
-    <>
-      <h1>字数：{count}文字</h1>
-    </>
-  );
+  const count = countArticle();
+  const text = typeof count === 'number' ? `字数：${count}文字` : 'error';
+  return <h1>{text}</h1>;
 };
 
 const render = () => {
@@ -32,7 +21,7 @@ const render = () => {
   const contentElement = getContentElement();
 
   if (!contentElement) {
-    console.warn('not found knowledge content!');
+    console.warn('not found knowledge article content!');
     return;
   }
 
