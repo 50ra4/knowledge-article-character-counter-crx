@@ -33,8 +33,7 @@ export default defineManifest(({ command, mode, ...manifest }) => ({
     {
       matches: ['*://*/*'],
       include_globs: [
-        '*/open.knowledge/view/*', // 記事
-        '*/protect.draft/view/*', // 作成中の記事
+        '*/open.knowledge/view/*', // 公開記事
       ],
       js: ['src/content_scripts/counter.tsx'],
     },
