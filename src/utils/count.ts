@@ -1,15 +1,24 @@
 type TagName = keyof HTMLElementTagNameMap;
 
-export const CODE_TAGS: TagName[] = ['pre'];
+type TagWithText = {
+  tagName: TagName;
+  text: string;
+};
 
-export const countCharacterInChildElements = (
-  rootElement: HTMLElement,
+export const SOURCE_CODE_TAGS: TagName[] = ['pre'];
+
+export const getTagWithTextListByChildren = (
+  parent: HTMLElement,
+): TagWithText[] =>
+  (Array.from(parent.children ?? []) as HTMLElement[]).map((elm) => ({
+    tagName: elm.tagName.toLowerCase() as TagName,
+    text: elm.innerText,
+  }));
+
+export const countCharacter = (
+  tagWithTextList: TagWithText[],
   excludedTags: TagName[],
 ) =>
-  (Array.from(rootElement.children ?? []) as HTMLElement[])
-    .map((elm) => ({
-      tagName: elm.tagName.toLowerCase() as TagName,
-      text: elm.innerText,
-    }))
-    .filter(({ tagName }) => !excludedTags.includes(tagName)) // 特定のタグを除く
+  tagWithTextList
+    .filter(({ tagName }) => !excludedTags.includes(tagName))
     .reduce((acc, cur) => acc + cur.text.length, 0);
