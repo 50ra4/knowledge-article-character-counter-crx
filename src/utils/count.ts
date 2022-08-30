@@ -1,6 +1,6 @@
 type TagName = keyof HTMLElementTagNameMap;
 
-type TagWithText = {
+export type TagWithText = {
   tagName: TagName;
   text: string;
 };
