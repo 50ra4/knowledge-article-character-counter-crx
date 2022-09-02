@@ -1,5 +1,6 @@
 import React, { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
+import { ArticleCounter } from '../components/ArticleCounter';
 import {
   countCharacter,
   getTagWithTextListByChildren,
@@ -19,7 +20,7 @@ const countArticle = () => {
 
 const Root = () => {
   const count = countArticle();
-  return typeof count === 'number' ? <h1>{`字数：${count}文字`}</h1> : null;
+  return typeof count === 'number' ? <ArticleCounter count={count} /> : null;
 };
 
 const render = () => {
