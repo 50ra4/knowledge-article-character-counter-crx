@@ -32,6 +32,7 @@ const render = () => {
 
   const root = document.createElement('div');
   root.setAttribute('id', 'knowledge-character-counter');
+  root.style.setProperty('margin', '4px 0');
 
   contentElement.parentElement?.prepend(root);
   createRoot(root).render(
