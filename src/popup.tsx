@@ -3,8 +3,8 @@ import { createRoot } from 'react-dom/client';
 import { FetchDraftArticleResponse } from './types';
 import {
   MessageState,
-  SendMessageRequestKey,
   MessageResponse,
+  SendMessageRequest,
 } from './utils/message';
 
 const Root = () => {
@@ -18,10 +18,9 @@ const Root = () => {
     setResponse({ type: 'loading' });
 
     chrome.runtime.sendMessage<
-      SendMessageRequestKey,
+      SendMessageRequest,
       MessageResponse<FetchDraftArticleResponse>
-    >('FETCH_DRAFT_ARTICLE_COUNT', (res) => {
-      console.log(res);
+    >({ type: 'FETCH_DRAFT_ARTICLE_COUNT' }, (res) => {
       setResponse(res);
     });
   };

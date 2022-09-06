@@ -14,7 +14,6 @@ chrome.runtime.onMessage.addListener(
   ) => {
     switch (request.type) {
       case 'FETCH_DRAFT_ARTICLE_COUNT':
-        console.log(request);
         sendResponse<typeof request.type>({
           type: 'success',
           data: {

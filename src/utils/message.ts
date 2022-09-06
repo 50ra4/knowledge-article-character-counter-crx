@@ -13,8 +13,7 @@ export type SendMessageRequestKey = 'FETCH_DRAFT_ARTICLE_COUNT';
 
 export type SendMessageRequest = {
   type: 'FETCH_DRAFT_ARTICLE_COUNT';
-  payload: unknown;
-  return: MessageResponse<FetchDraftArticleResponse>;
+  // payload: {};
 };
 
 export type SendMessageResponse = {
