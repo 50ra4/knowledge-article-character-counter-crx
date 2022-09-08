@@ -20,7 +20,7 @@ const Root = () => {
     chrome.runtime.sendMessage<
       SendMessageRequest,
       MessageResponse<FetchDraftArticleResponse>
-    >({ type: 'FETCH_DRAFT_ARTICLE_COUNT' }, (res) => {
+    >({ type: 'FETCH_DRAFT_ARTICLE_COUNT', payload: { id: 682 } }, (res) => {
       setResponse(res);
     });
   };
