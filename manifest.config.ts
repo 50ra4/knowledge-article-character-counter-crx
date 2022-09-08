@@ -28,7 +28,10 @@ export default defineManifest(({ command, mode, ...manifest }) => ({
     page: 'options.html',
   },
   author,
-  permissions: ['background'],
+  permissions: ['background', 'tabs', 'scripting'],
+  host_permissions: [
+    '*://*/*protect.draft/view/*', //下書き記事
+  ],
   content_scripts: [
     {
       matches: ['*://*/*'],
