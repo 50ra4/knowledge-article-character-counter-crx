@@ -119,7 +119,6 @@ const fetchDraftArticleCount = async (
       draftNumber: id,
       title: info.title,
       count: info.count,
-      updatedAt: new Date().toISOString(),
     },
   };
 };
