@@ -1,4 +1,5 @@
 import { FetchDraftArticleResponse } from './types';
+import { TagWithText } from './utils/count';
 import {
   MessageResponse,
   SendMessageRequest,
@@ -40,6 +41,39 @@ const isSelectedPreviewTab = () => {
     : previewTab.getAttribute('aria-expanded') === 'true';
 };
 
+const getDraftArticleInfo = () => {
+  const content = document.querySelector<HTMLElement>('div#content');
+  if (!content) {
+    return null;
+  }
+
+  // // FIXME: nullが返却されてしまう...
+  // // 一旦コピペで対応（多分、reference error？）
+  // const count = countCharacter(
+  //   getTagWithTextListByChildren(content),
+  //   SOURCE_CODE_TAGS,
+  // );
+
+  const list = (Array.from(content.children) as HTMLElement[]).map(
+    (elm): TagWithText => ({
+      tagName: elm.tagName.toLowerCase() as TagWithText['tagName'],
+      text: elm.innerText,
+    }),
+  );
+
+  const count = list
+    .filter(({ tagName }) => !['pre'].includes(tagName))
+    .reduce((acc, cur) => acc + cur.text.length, 0);
+
+  const title =
+    document.querySelector<HTMLInputElement>('input#input_title')?.value ?? '';
+
+  return {
+    title,
+    count,
+  };
+};
+
 const fetchDraftArticleCount = async (
   id: number,
 ): Promise<MessageResponse<FetchDraftArticleResponse>> => {
@@ -71,14 +105,20 @@ const fetchDraftArticleCount = async (
     });
   }
 
-  // TODO:
+  const info = await executeScript(tab.id, getDraftArticleInfo);
+  if (info === null) {
+    throw new SendMessageError({
+      code: 'NOT_FOUND',
+      message: `#${id}の下書き記事の情報取得に失敗しました.再度お試しください.`,
+    });
+  }
+
   return {
     type: 'success',
     data: {
-      // FIXME: replace
-      title: 'article title',
-      draftNumber: 300,
-      count: 500,
+      draftNumber: id,
+      title: info.title,
+      count: info.count,
       updatedAt: new Date().toISOString(),
     },
   };
