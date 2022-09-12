@@ -111,9 +111,22 @@ const Root = () => {
       )}
 
       {errorMessage && (
-        <p
-          style={{ fontSize: '12px', color: '#900900' }}
-        >{`エラー: ${errorMessage}`}</p>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            fontSize: '16px',
+            fontWeight: 'bold',
+            backgroundColor: '#900900',
+            marginTop: '8px',
+            padding: '8px',
+          }}
+        >
+          <span
+            style={{ color: '#ffffff' }}
+          >{`【エラー】 ${errorMessage}`}</span>
+        </div>
       )}
 
       {!!definitionList.length && (
