@@ -22,10 +22,10 @@ const executeScript = async <F extends (...args: any[]) => any>(
   return head.result as ReturnType<F>;
 };
 
-const fetchKnowledgeDraftPageTabs = async (id: number) =>
+const fetchKnowledgeDraftPageTabs = async (draftNumber: number) =>
   await chrome.tabs.query({
     // https://developer.mozilla.org/ja/docs/Mozilla/Add-ons/WebExtensions/Match_patterns
-    url: `*://*/*protect.draft/view/${id}`,
+    url: `*://*/*protect.draft/view/${draftNumber}`,
   });
 
 const isSelectedPreviewTab = () => {
@@ -133,7 +133,7 @@ chrome.runtime.onMessage.addListener(
   ) => {
     switch (request.type) {
       case 'FETCH_DRAFT_ARTICLE_COUNT':
-        fetchDraftArticleCount(request.payload.id)
+        fetchDraftArticleCount(request.payload.draftNumber)
           .then((res) => {
             sendResponse(res);
           })

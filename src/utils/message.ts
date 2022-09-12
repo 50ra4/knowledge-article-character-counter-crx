@@ -52,7 +52,7 @@ export type MessageState<T> =
 export type SendMessageRequest = {
   type: 'FETCH_DRAFT_ARTICLE_COUNT';
   payload: {
-    id: number;
+    draftNumber: number;
   };
 };
 
