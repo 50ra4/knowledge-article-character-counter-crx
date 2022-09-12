@@ -117,14 +117,24 @@ const Root = () => {
       )}
 
       {!!definitionList.length && (
-        <dl style={{}}>
-          {definitionList.map(({ term, description }) => (
-            <div key={term} style={{ display: 'flex' }}>
+        <dl style={{ border: '1px solid #efefef' }}>
+          {definitionList.map(({ term, description }, i) => (
+            <div
+              key={term}
+              style={{
+                display: 'flex',
+                borderBottom:
+                  definitionList.length !== i + 1
+                    ? '1px solid #efefef'
+                    : 'none',
+              }}
+            >
               <dt
                 style={{
                   flex: '0 0 100px',
                   fontWeight: 'bold',
                   fontSize: '14px',
+                  borderRight: '1px solid #efefef',
                 }}
               >
                 {term}
@@ -132,6 +142,7 @@ const Root = () => {
               <dd
                 style={{
                   fontSize: '14px',
+                  margin: '0',
                 }}
               >
                 {description}
