@@ -27,13 +27,18 @@ export default defineManifest(({ command, mode, ...manifest }) => ({
   options_ui: {
     page: 'options.html',
   },
-  devtools_page: 'devTools.html',
   author,
-  permissions: ['background'],
+  permissions: ['background', 'tabs', 'scripting', 'storage'],
+  host_permissions: [
+    '*://*/*protect.draft/view/*', //下書き記事
+  ],
   content_scripts: [
     {
-      matches: ['https://example.com/*'],
-      js: ['src/content_scripts/sample.tsx'],
+      matches: ['*://*/*'],
+      include_globs: [
+        '*/open.knowledge/view/*', // 公開記事
+      ],
+      js: ['src/content_scripts/counter.tsx'],
     },
   ],
   background: {
