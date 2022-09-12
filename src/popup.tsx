@@ -1,6 +1,7 @@
 import React, { StrictMode, useMemo, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { InputNumber } from './components/InputNumber';
+import { useChromeStorage } from './hooks/useChromeStorage';
 import { FetchDraftArticleResponse } from './types';
 import {
   MessageState,
@@ -22,7 +23,10 @@ const validateDraftNumber = (v?: number) => {
 };
 
 const Root = () => {
-  const [draftNumber, setDraftNumber] = useState<number | undefined>(undefined);
+  const [draftNumber, setDraftNumber] = useChromeStorage<number | undefined>(
+    'draftNumber',
+    undefined,
+  );
   const [response, setResponse] = useState<
     MessageState<FetchDraftArticleResponse>
   >({
