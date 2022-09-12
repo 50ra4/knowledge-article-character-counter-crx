@@ -1,6 +1,6 @@
 import { FetchDraftArticleResponse } from '../types';
 
-type MessageError = { code: string; message: string };
+type ErrorResponse = { code: string; message: string };
 
 export class SendMessageError extends Error {
   public readonly name = 'SendMessageError';
@@ -13,7 +13,7 @@ export class SendMessageError extends Error {
     this.message = message;
   }
 
-  toObj(): MessageError {
+  toObj(): ErrorResponse {
     return {
       code: this.code,
       message: this.message,
@@ -21,9 +21,7 @@ export class SendMessageError extends Error {
   }
 }
 
-export const toSendMessageResponse = (
-  error: unknown,
-): { type: 'error'; error: MessageError } => {
+export const toSendMessageErrorResponse = (error: unknown): MessageError => {
   if (error instanceof SendMessageError) {
     return {
       type: 'error',
@@ -40,9 +38,8 @@ export const toSendMessageResponse = (
   };
 };
 
-export type MessageResponse<T> =
-  | { type: 'success'; data: T }
-  | { type: 'error'; error: MessageError };
+type MessageError = { type: 'error'; error: ErrorResponse };
+export type MessageResponse<T> = { type: 'success'; data: T } | MessageError;
 
 export type MessageState<T> =
   | MessageResponse<T>

@@ -6,7 +6,7 @@ import {
   SendMessageRequestKey,
   SendMessageResponse,
   SendMessageError,
-  toSendMessageResponse,
+  toSendMessageErrorResponse,
 } from './utils/message';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -140,7 +140,7 @@ chrome.runtime.onMessage.addListener(
           .catch((error) => {
             // TODO: remove console.log
             console.error(error);
-            sendResponse(toSendMessageResponse(error));
+            sendResponse(toSendMessageErrorResponse(error));
           });
         break;
 
