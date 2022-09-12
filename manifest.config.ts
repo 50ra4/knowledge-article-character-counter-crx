@@ -28,7 +28,7 @@ export default defineManifest(({ command, mode, ...manifest }) => ({
     page: 'options.html',
   },
   author,
-  permissions: ['background', 'tabs', 'scripting'],
+  permissions: ['background', 'tabs', 'scripting', 'storage'],
   host_permissions: [
     '*://*/*protect.draft/view/*', //下書き記事
   ],
